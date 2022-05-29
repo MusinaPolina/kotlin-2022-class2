@@ -85,7 +85,7 @@ class EncodeStreamTest {
         }
     }
 
-    @Test
+   @Test
     fun decodeSample1_2() {
         decompress("./sample1.2.tgz", rootInputFolder)
         val reader = InputStreamReader(DecodeStream(rootInputFolder), "UTF-8")
@@ -93,6 +93,7 @@ class EncodeStreamTest {
             assertEquals("Кто тесты не писал, тот в цирке не смеётся!", it.readText())
         }
     }
+
 
     @Test
     fun decodeSample2_1() {
@@ -112,4 +113,11 @@ class EncodeStreamTest {
         }
     }
 
+    @Test
+    fun decodeSecret() {
+        decompress("./secret.tgz", rootInputFolder)
+        val reader = InputStreamReader(DecodeStream(rootInputFolder), "UTF-8")
+        val writer = FileOutputStream(File("answer.png"))
+        writer.write(reader.readText().toByteArray())
+    }
 }
